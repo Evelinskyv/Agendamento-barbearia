@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<title>Agende seu horário</title>
+
+<style>
+body{
+  margin: 15px;
+  padding: 10px;
+  font-family: Arial;
+  background: linear-gradient(135deg, #0f0f0f, #646363);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h2, h3{
+  color: rgb(234, 234, 245);
+  text-align: center;
+}
+
+label{
+  font-weight: bold;
+  color: #ebbaba;
+}
+input, textarea {
+  width: 99%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 16px;
+  border: 2px solid #e72222;
+  font-size: 16px;
+}
+
+select{
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 16px;
+  border: 2px solid #e72222;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px;
+  background: #571919;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h2>LIPE DO CORTE 🚀✨</h2>
+<h3>REALIZE O AGENDAMENTO DO SEU CORTE!</h3>
+
+<form onsubmit="return enviarWhatsApp()">
+
+<label>QUAL SEU NOME? 👤</label>
+<input type="text" id="nome" placeholder="Digite seu nome" required>
+
+<label>QUAL CORTE IRÁ FAZER? 💈</label>
+<textarea id="corte" rows="4" placeholder="Escreva seu corte..." required></textarea>
+
+<label>DIA DO SEU CORTE 📅</label>
+<select id="dia" required>
+  <option value="">Escolha o dia</option>
+  <option>Segunda-feira</option>
+  <option>Terça-feira</option>
+  <option>Quarta-feira</option>
+  <option>Quinta-feira</option>
+  <option>Sexta-feira</option>
+  <option>Sábado</option>
+</select>
+
+<label>HORÁRIO ⌚</label>
+<select id="horario" required>
+  <option value="">Escolha o horário</option>
+  <option>12:30</option>
+  <option>13:20</option>
+  <option>14:20</option>
+  <option>15:20</option>
+  <option>17:20</option>
+  <option>18:20</option>
+  <option>19:20</option>
+  <option>20:20</option>
+  <option>21:20</option>
+</select>
+
+<button type="submit">
+FINALIZAR AGENDAMENTO! ✅
+</button>
+
+</form>
+
+<div id="telaFinal" style="
+  display:none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+  text-align: center;
+">
+  <h2>✅ Agendamento Concluído!</h2>
+  <p style="font-size:18px; margin-top:10px;">
+    Obrigado pela preferência 💈<br>
+    Até logo!
+  </p>
+</div>
+
+<script>
+function enviarWhatsApp() {
+
+  const nome = document.getElementById("nome").value.trim();
+  const corte = document.getElementById("corte").value.trim();
+  const dia = document.getElementById("dia").value;
+  const horario = document.getElementById("horario").value;
+
+  if (!nome || !corte || !dia || !horario) {
+    alert("⚠️ Preencha todos os campos obrigatórios!");
+    return false;
+  }
+
+  const numero = "5575992660210";
+
+  const mensagem = 
+`💈 AGENDAMENTO DE CORTE 💈
+
+👤 Nome: ${nome}
+✂ Corte: ${corte}
+📅 Dia: ${dia}
+⌚ Horário: ${horario}`;
+
+  const link = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
+
+  document.getElementById("telaFinal").style.display = "flex";
+
+  setTimeout(() => {
+    window.open(link, "_blank");
+  }, 2000);
+
+  return false; // impede reload da página
+}
+</script>
+
+</body>
+
+</html>
+
